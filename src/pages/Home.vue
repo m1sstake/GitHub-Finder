@@ -110,7 +110,6 @@ export default {
       .filter((row, index) => {
         let start = (this.page.current -1) * this.page.length
         let end = this.page.current * this.page.length
-        console.log(`start ${start} end ${end}`)
         if (index >= start && index < end) return true
       })
       }
