@@ -1,4 +1,4 @@
-# vue
+# GitHub Finder
 
 ## Project setup
 ```
