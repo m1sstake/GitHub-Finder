@@ -21,8 +21,11 @@ export default {
         commit('setUser', res.data)
         dispatch('error/setError', null, { root: true })
       })
-      .catch (error => {
-        dispatch('error/setError', error, { root: true })
+      .catch(error => {
+        dispatch('repos/setRepos', null, { root: true })
+        commit('setUser', null)
+        error.code == 404 ? dispatch('error/setError', 'Cant find this user', { root:true })
+         : dispatch('error/setError', error, { root:true })
       })
       .finally (() => dispatch('loading/setLoading', false, { root: true }))
     }

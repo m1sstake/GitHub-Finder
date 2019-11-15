@@ -11,7 +11,7 @@ export default {
     }
   },
   actions: {
-    getRepos ({ commit, dispatch }, payload,) {
+    getRepos ({ commit, dispatch }, payload) {
       dispatch('loading/setLoading', true, { root: true })
       axios
         .get(`https://api.github.com/users/${payload}/repos`)
@@ -21,7 +21,11 @@ export default {
           })
         .catch(error => {
           dispatch('error/setError', 'Cant find this user', { root: true })
+          commit('setRepos', null)
           })
-    }
+         },
+      setRepos ({ commit }, payload) {
+        commit('setRepos', payload)
+      }
   },
 }

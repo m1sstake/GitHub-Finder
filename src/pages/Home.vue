@@ -102,10 +102,11 @@ export default {
       if (!this.repos) return false
       else {
       return this.repos.sort((a, b) => {
+        console.log(a[this.currentSort])
         let mod = 1
         if (this.currentSortDir === 'desc') mod = -1
-        if (a[this.currentSort] < b[this.currentSort]) return -1 * mod
-        if (a[this.currentSort] > b[this.currentSort]) return 1 * mod
+        if (a[this.currentSort].toLowerCase() < b[this.currentSort].toLowerCase()) return -1 * mod
+        if (a[this.currentSort].toLowerCase() > b[this.currentSort].toLowerCase()) return 1 * mod
       })
       .filter((row, index) => {
         let start = (this.page.current -1) * this.page.length
