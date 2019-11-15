@@ -104,8 +104,8 @@ export default {
       return this.repos.sort((a, b) => {
         let mod = 1
         if (this.currentSortDir === 'desc') mod = -1
-        if (a[this.currentSort].toLowerCase() < b[this.currentSort].toLowerCase()) return -1 * mod
-        if (a[this.currentSort].toLowerCase() > b[this.currentSort].toLowerCase()) return 1 * mod
+        if (this.parseIndex(a[this.currentSort]) < this.parseIndex(b[this.currentSort])) return -1 * mod
+        if (this.parseIndex(a[this.currentSort]) > this.parseIndex(b[this.currentSort])) return 1 * mod
       })
       .filter((row, index) => {
         let start = (this.page.current -1) * this.page.length
@@ -118,6 +118,15 @@ export default {
   methods: {
     ...mapActions('repos',['getRepos']),
     ...mapActions('user',['getUser']),
+
+    parseIndex(arrayElement) {
+      if (typeof arrayElement != "string") {
+        return arrayElement
+      }
+      else {
+        return arrayElement.replace("_", "-").toLowerCase()
+      }
+    },
 
     getAll () {
       this.getRepos(this.search)
